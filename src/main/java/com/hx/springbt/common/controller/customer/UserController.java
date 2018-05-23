@@ -1,7 +1,7 @@
-package com.hx.springbt.common.controller;
+package com.hx.springbt.common.controller.customer;
 
-import com.hx.springbt.common.entity.User;
-import com.hx.springbt.common.service.UserService;
+import com.hx.springbt.common.entity.customer.User;
+import com.hx.springbt.common.service.customer.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

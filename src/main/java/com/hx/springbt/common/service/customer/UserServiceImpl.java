@@ -1,7 +1,7 @@
-package com.hx.springbt.common.service;
+package com.hx.springbt.common.service.customer;
 
-import com.hx.springbt.common.dao.UserDao;
-import com.hx.springbt.common.entity.User;
+import com.hx.springbt.common.dao.customer.UserDao;
+import com.hx.springbt.common.entity.customer.User;
 import com.hx.springbt.core.dao.BaseDao;
 import com.hx.springbt.core.service.BaseServiceImpl;
 import org.springframework.stereotype.Service;

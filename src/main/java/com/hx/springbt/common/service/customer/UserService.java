@@ -1,6 +1,6 @@
-package com.hx.springbt.common.service;
+package com.hx.springbt.common.service.customer;
 
-import com.hx.springbt.common.entity.User;
+import com.hx.springbt.common.entity.customer.User;
 import com.hx.springbt.core.service.BaseService;
 
 /**

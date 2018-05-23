@@ -1,6 +1,6 @@
-package com.hx.springbt.common.dao;
+package com.hx.springbt.common.dao.customer;
 
-import com.hx.springbt.common.entity.User;
+import com.hx.springbt.common.entity.customer.User;
 import com.hx.springbt.core.dao.BaseDao;
 import org.springframework.stereotype.Repository;
 

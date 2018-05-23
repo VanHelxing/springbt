@@ -1,4 +1,4 @@
-package com.hx.springbt.common.entity;
+package com.hx.springbt.common.entity.customer;
 
 import com.hx.springbt.core.entity.BaseEntity;
 import lombok.Data;
