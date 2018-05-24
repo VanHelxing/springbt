@@ -1,5 +1,6 @@
 package com.hx.springbt.core.service;
 
+import com.hx.springbt.common.util.lang.StringUtils;
 import com.hx.springbt.core.dao.BaseDao;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -7,7 +8,12 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.Map;
 
 @Transactional
 @Service
@@ -90,5 +96,18 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
     @Override
     public Page<T> findAll(Specification<T> spec, Pageable pageable) {
         return getRepository().findAll(spec, pageable);
+    }
+
+    /**
+     * 查询用户信息列表(支持分页和多条件查询)
+     *
+     * @param args     the args
+     * @param sortType the sort type
+     * @return the map
+     * @author : yangjunqing / 2018-05-24
+     */
+    @Override
+    public Map<String, Object> search(Map<String, String> args, String sortType) {
+        return null;
     }
 }

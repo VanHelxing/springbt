@@ -1,5 +1,8 @@
 package com.hx.springbt.common.controller;
 
+import com.hx.springbt.common.util.http.ServletUtils;
+import com.hx.springbt.security.entity.SecurityUser;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +22,10 @@ public class CommonController {
      */
     @RequestMapping("/")
     public String home(Model model){
-        model.addAttribute("name", "luvletter");
+
+        SecurityUser user = (SecurityUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        model.addAttribute("name", user.getUsername());
         return "home";
     }
 }

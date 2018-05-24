@@ -5,11 +5,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
  * 通用方法Service接口
  *
+ * @param <T> the type parameter
  * @author : yangjunqing / yangjunqing@zhimadi.cn
  * @version : 1.0
  */
@@ -18,43 +20,55 @@ public interface BaseService<T> {
 
     /**
      * 保存
-     * @param s
-     * @return
+     *
+     * @param s the s
+     * @return t t
+     * @author : yangjunqing / 2018-05-24
      */
     public T save(T s);
 
 
     /**
      * 删除
-     * @param s
+     *
+     * @param s the s
+     * @author : yangjunqing / 2018-05-24
      */
     public void delete(T s);
 
     /**
      * 查询单条信息
-     * @param id
-     * @return
+     *
+     * @param id the id
+     * @return t t
+     * @author : yangjunqing / 2018-05-24
      */
     public T findById(String id);
 
     /**
      * 查询所有记录(不分页)
-     * @return
+     *
+     * @return list list
+     * @author : yangjunqing / 2018-05-24
      */
     public List<T> findAll();
 
     /**
      * 查询所有记录(分页)
-     * @param pageable
-     * @return
+     *
+     * @param pageable the pageable
+     * @return page page
+     * @author : yangjunqing / 2018-05-24
      */
     public Page<T> findAll(Pageable pageable);
 
 
     /**
      * 查询所有记录(用于复杂的sql查询，不分页)
-     * @param spec
-     * @return
+     *
+     * @param spec the spec
+     * @return list list
+     * @author : yangjunqing / 2018-05-24
      */
     public List<T> findAll(Specification<T> spec);
 
@@ -67,5 +81,16 @@ public interface BaseService<T> {
      * @author : yangjunqing / 2018-05-16
      */
     public Page<T> findAll(Specification<T> spec, Pageable pageable);
+
+
+    /**
+     * 查询用户信息列表(支持分页和多条件查询)
+     *
+     * @param args     the args
+     * @param sortType the sort type
+     * @return the map
+     * @author : yangjunqing / 2018-05-24
+     */
+    public Map<String, Object> search(Map<String, String> args, String sortType);
 
 }
