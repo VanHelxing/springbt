@@ -1,6 +1,8 @@
 package com.hx.springbt.common.util.page;
 
 import com.hx.springbt.common.util.lang.StringUtils;
+import com.hx.springbt.core.constant.Constraints;
+import com.hx.springbt.core.entity.ResponsePage;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -18,21 +20,18 @@ import java.util.Map;
 public class PageUtils {
 
     /**
-     * 封装分页数据到Map中
-     *
-     * @param objPage the obj page
-     * @return the map
-     * @author : yangjunqing / 2018-05-24
+     * Page数据封装到统一格式中返回
+     * @param page
+     * @return
      */
-    public static Map<String, Object> getPageMap(Page<?> objPage){
-        Map<String, Object> resultMap = new HashMap<>();
+    public static ResponsePage getResponsePage(Page<?> page){
+        Map<String, Object> pageMap = new HashMap<>();
 
-        resultMap.put("page_data", objPage.getContent());
-        resultMap.put("total_num", objPage.getTotalElements());
-        resultMap.put("total_page", objPage.getTotalPages());
-        resultMap.put("page_num", objPage.getNumber());
-        resultMap.put("page_size", objPage.getSize());
-        return resultMap;
+        pageMap.put(Constraints.TOTAL_NUM, page.getTotalElements());
+        pageMap.put(Constraints.TOTAL_PAGE, page.getTotalPages());
+        pageMap.put(Constraints.PAGE_NUM, page.getNumber());
+        pageMap.put(Constraints.PAGE_SIZE, page.getSize());
+        return ResponsePage.ok(page.getContent(), pageMap);
     }
 
     /**
@@ -48,18 +47,20 @@ public class PageUtils {
     public static PageRequest buildPageRequest(int pageNum, int pageSize, String sortType, String direction) {
         Sort sort = null;
 
-        if (StringUtils.isEmpty(sortType)) {
-            return new PageRequest(pageNum - 1, pageSize);
-        } else if (!StringUtils.isEmpty(direction)) {
+        if (StringUtils.isEmpty(direction)) {
+            return PageRequest.of(pageNum - 1, pageSize);
+        }
+        else if (!StringUtils.isEmpty(direction)) {
             if (Direction.ASC.equals(direction)) {
                 sort = new Sort(Direction.ASC, sortType);
             } else {
                 sort = new Sort(Direction.DESC, sortType);
             }
-            return new PageRequest(pageNum - 1, pageSize, sort);
-        } else {
+            return PageRequest.of(pageNum - 1, pageSize);
+        }
+        else {
             sort = new Sort(Direction.ASC, sortType);
-            return new PageRequest(pageNum - 1, pageSize, sort);
+            return PageRequest.of(pageNum - 1, pageSize, sort);
         }
     }
 
@@ -79,7 +80,7 @@ public class PageUtils {
      * @return
      */
     public static PageRequest buildPageRequest(int pageNum, int pageSize, Sort sort) {
-        return new PageRequest(pageNum - 1, pageSize, sort);
+        return PageRequest.of(pageNum - 1, pageSize, sort);
     }
 
     /**
