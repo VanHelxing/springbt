@@ -1,13 +1,13 @@
 package com.hx.springbt.common.util.http;
 
 import com.hx.springbt.common.util.lang.StringUtils;
+import com.hx.springbt.core.entity.SearchParam;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /** Http工具类
  * @author : yangjunqing / yangjunqing@zhimadi.cn
@@ -88,6 +88,25 @@ public class ServletUtils {
         }
 
         return false;
+    }
+
+    public static List<SearchParam> getSearchParam(HttpServletRequest request){
+        List<SearchParam> searchParams = new ArrayList<>();
+
+        Enumeration<String> keys = request.getParameterNames();
+        for (Enumeration<String> e = keys; keys.hasMoreElements();){
+            String key = keys.nextElement().toString();
+            if ("pageNum".equals(key) || "pageSize".equals(key) || "sort".equals(key) || "direction".equals(key)){
+                continue;
+            }
+            SearchParam param = new SearchParam();
+            param.setColumnName(key);
+            param.setClazz(request.getParameter(key).getClass());
+            param.setColumnValue(request.getParameter(key));
+            searchParams.add(param);
+        }
+
+        return searchParams;
     }
 
 }

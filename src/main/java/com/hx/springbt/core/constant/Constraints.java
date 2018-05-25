@@ -18,5 +18,7 @@ public class Constraints {
     public final static String PAGE_NUM = "pageNum";
     /** 页面数据数量 */
     public final static String PAGE_SIZE = "pageSize";
+    /** 页面信息 */
+    public final static String PAGE_INFO = "pageInfo";
 
 }

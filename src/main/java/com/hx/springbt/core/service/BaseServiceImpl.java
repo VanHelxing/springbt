@@ -1,17 +1,18 @@
 package com.hx.springbt.core.service;
 
 import com.hx.springbt.common.util.lang.StringUtils;
+import com.hx.springbt.common.util.page.PageUtils;
 import com.hx.springbt.core.dao.BaseDao;
+import com.hx.springbt.core.entity.PageInfo;
+import com.hx.springbt.core.entity.SearchParam;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -98,16 +99,43 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
         return getRepository().findAll(spec, pageable);
     }
 
+
     /**
-     * 查询用户信息列表(支持分页和多条件查询)
+     * 分页查询(一个参数对应一个条件)
      *
-     * @param args     the args
-     * @param sortType the sort type
-     * @return the map
-     * @author : yangjunqing / 2018-05-24
+     * @param params   参数信息
+     * @param pageInfo 页面信息
+     * @return the page
+     * @author : yangjunqing / 2018-05-25
      */
     @Override
-    public Map<String, Object> search(Map<String, String> args, String sortType) {
-        return null;
+    public Page<T> search(List<SearchParam> params, PageInfo pageInfo) {
+
+        Pageable pageable = PageUtils.buildPageRequest(pageInfo);
+
+        Page<T> page = getRepository().findAll(new Specification<T>() {
+            @Override
+            public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+                List<Predicate> predicates = new ArrayList<>();
+
+//                predicates.add(builder.like(root.get("id").as(String.class),"%"));
+                //遍历参数信息
+                if (params != null && params.size() > 0) {
+                    for (SearchParam param : params) {
+                        String column = param.getColumnName();
+                        Class<?> clazz = param.getClazz();
+                        Object value = param.getColumnValue();
+                        if ((!StringUtils.isEmpty(column)) && clazz != null && value != null) {
+                            predicates.add(builder.like((Expression<String>) root.get(column).as(clazz), "%" + value + "%"));
+                        }
+                    }
+                }
+
+                return builder.and(predicates.toArray(new Predicate[predicates.size()]));
+            }
+        }, pageable);
+
+        return page;
     }
+
 }

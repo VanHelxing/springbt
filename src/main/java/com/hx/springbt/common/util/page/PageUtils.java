@@ -2,6 +2,7 @@ package com.hx.springbt.common.util.page;
 
 import com.hx.springbt.common.util.lang.StringUtils;
 import com.hx.springbt.core.constant.Constraints;
+import com.hx.springbt.core.entity.PageInfo;
 import com.hx.springbt.core.entity.ResponsePage;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,14 +26,24 @@ public class PageUtils {
      * @return
      */
     public static ResponsePage getResponsePage(Page<?> page){
-        Map<String, Object> pageMap = new HashMap<>();
+        Map<String, Object> pageInfo = new HashMap<>();
 
-        pageMap.put(Constraints.TOTAL_NUM, page.getTotalElements());
-        pageMap.put(Constraints.TOTAL_PAGE, page.getTotalPages());
-        pageMap.put(Constraints.PAGE_NUM, page.getNumber());
-        pageMap.put(Constraints.PAGE_SIZE, page.getSize());
-        return ResponsePage.ok(page.getContent(), pageMap);
+        pageInfo.put(Constraints.TOTAL_NUM, page.getTotalElements());
+        pageInfo.put(Constraints.TOTAL_PAGE, page.getTotalPages());
+        pageInfo.put(Constraints.PAGE_NUM, page.getNumber() + 1);
+        pageInfo.put(Constraints.PAGE_SIZE, page.getSize());
+        return ResponsePage.ok(page.getContent(), pageInfo);
     }
+
+    /**
+     * 创建分页请求
+     * @param info
+     * @return
+     */
+    public static PageRequest buildPageRequest(PageInfo info){
+        return buildPageRequest(info.getPageNum(), info.getPageSize(), info.getSort(), info.getDirection());
+    }
+
 
     /**
      * 创建分页请求。

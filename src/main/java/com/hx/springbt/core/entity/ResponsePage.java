@@ -26,17 +26,17 @@ public class ResponsePage {
     /**
      * 页面信息
      */
-    private Map<String, Object> pageMap;
+    private Map<String, Object> pageInfo;
 
     /**
      * 数据
      */
     private Object data;
 
-    public ResponsePage(String status, String message, Map<String, Object> pageMap, Object data) {
+    public ResponsePage(String status, String message, Map<String, Object> pageInfo, Object data) {
         this.status = status;
         this.message = message;
-        this.pageMap = pageMap;
+        this.pageInfo = pageInfo;
         this.data = data;
     }
 
@@ -61,7 +61,6 @@ public class ResponsePage {
     }
 
 
-
     public String getStatus() {
         return status;
     }
@@ -78,12 +77,12 @@ public class ResponsePage {
         this.message = message;
     }
 
-    public Map<String, Object> getPageMap() {
-        return pageMap;
+    public Map<String, Object> getPageInfo() {
+        return pageInfo;
     }
 
-    public void setPageMap(Map<String, Object> pageMap) {
-        this.pageMap = pageMap;
+    public void setPageInfo(Map<String, Object> pageInfo) {
+        this.pageInfo = pageInfo;
     }
 
     public Object getData() {

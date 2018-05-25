@@ -1,5 +1,7 @@
 package com.hx.springbt.core.service;
 
+import com.hx.springbt.core.entity.PageInfo;
+import com.hx.springbt.core.entity.SearchParam;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -84,13 +86,13 @@ public interface BaseService<T> {
 
 
     /**
-     * 查询用户信息列表(支持分页和多条件查询)
+     * 分页查询
      *
-     * @param args     the args
-     * @param sortType the sort type
-     * @return the map
-     * @author : yangjunqing / 2018-05-24
+     * @param params 参数信息
+     * @param pageInfo 页面信息
+     * @return the page
+     * @author : yangjunqing / 2018-05-25
      */
-    public Map<String, Object> search(Map<String, String> args, String sortType);
+    public Page<T> search(List<SearchParam> params, PageInfo pageInfo);
 
 }
