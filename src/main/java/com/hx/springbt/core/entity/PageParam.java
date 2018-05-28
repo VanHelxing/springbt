@@ -5,7 +5,7 @@ package com.hx.springbt.core.entity;
  * @author : yangjunqing / yangjunqing@zhimadi.cn
  * @version : 1.0
  */
-public class PageInfo {
+public class PageParam {
 
     private final static int DEFAULT_PAGE_SIZE = 50;
 

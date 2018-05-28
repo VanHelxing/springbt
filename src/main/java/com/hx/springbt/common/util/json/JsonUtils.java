@@ -38,8 +38,14 @@ public class JsonUtils {
     /**
      * Object to json string.
      */
-    public static String objectToJson(Object obj) throws JsonProcessingException {
-        return objectMapper.writeValueAsString(obj);
+    public static String objectToJson(Object obj) {
+        String jsonStr = null;
+        try {
+            jsonStr = objectMapper.writeValueAsString(obj);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return jsonStr;
     }
 
     /**
@@ -49,11 +55,16 @@ public class JsonUtils {
      * @param jsonStr the json str
      * @param clazz   the clazz
      * @return the t
-     * @throws IOException the io exception
      * @author : yangjunqing / 2018-05-25
      */
-    public static <T> T jsonToPojo(String jsonStr, Class<T> clazz) throws IOException {
-        return objectMapper.readValue(jsonStr, clazz);
+    public static <T> T jsonToPojo(String jsonStr, Class<T> clazz) {
+        T t = null;
+        try {
+            t = objectMapper.readValue(jsonStr, clazz);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return t;
     }
 
     /**
@@ -62,12 +73,16 @@ public class JsonUtils {
      * @param <T>     the type parameter
      * @param jsonStr the json str
      * @return the map
-     * @throws Exception the exception
      * @author : yangjunqing / 2018-05-25
      */
-    public static <T> Map<String, Object> json2map(String jsonStr)
-            throws Exception {
-        return objectMapper.readValue(jsonStr, Map.class);
+    public static <T> Map<String, Object> json2map(String jsonStr) {
+        Map<String, Object> objectMap = null;
+        try {
+            objectMap = objectMapper.readValue(jsonStr, Map.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return objectMap;
     }
 
     /**

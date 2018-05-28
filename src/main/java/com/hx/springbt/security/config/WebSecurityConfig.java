@@ -23,9 +23,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/**/*.json").permitAll()
+                .antMatchers("/**/*.json").permitAll()  //REST请求暂时不拦截,需要用令牌方式验证
                 .antMatchers("/customLogin", "/login").permitAll()
-                .antMatchers("/resource/**", "/smart-admin/**").permitAll()
+                .antMatchers("/swagger-ui.html", "/swagger-resources", "/v2/**", "/configuration/**").permitAll()
+                .antMatchers("/resource/**", "/smart-admin/**", "/webjars/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
