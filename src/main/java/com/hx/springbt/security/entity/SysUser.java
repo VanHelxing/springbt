@@ -43,7 +43,6 @@ public class SysUser extends BaseEntity {
      */
     private String tel;
 
-    @Transient
     /** 用户角色 */
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "sysUser")
     private Set<SysUserRole> userRoles = new HashSet<SysUserRole>();

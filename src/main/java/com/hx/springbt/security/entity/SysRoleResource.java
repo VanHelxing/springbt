@@ -3,8 +3,7 @@ package com.hx.springbt.security.entity;
 import com.hx.springbt.core.entity.BaseEntity;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * 角色资源映射表
@@ -17,15 +16,20 @@ import javax.persistence.Table;
 public class SysRoleResource extends BaseEntity {
 
     private static final long serialVersionUID = -27860623274181706L;
-    /**
-     * 资源编号
-     */
-    private String resourceId;
 
     /**
-     * 角色编号
+     * 资源
      */
-    private String roleId;
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = SysResource.class)
+    @JoinColumn(name = "resource_id", nullable = false)
+    private SysResource sysResource;
+
+    /**
+     * 角色
+     */
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = SysRole.class)
+    @JoinColumn(name = "role_id", nullable = false)
+    private SysRole sysRole;
 
     /**
      * 机构编号

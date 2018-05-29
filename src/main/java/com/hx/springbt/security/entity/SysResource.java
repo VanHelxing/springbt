@@ -4,7 +4,11 @@ import com.hx.springbt.core.entity.BaseEntity;
 import lombok.Data;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 系统资源
@@ -36,6 +40,10 @@ public class SysResource extends BaseEntity {
      * 备注
      */
     private String remark;
+
+    /** 角色资源 */
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "sysResource")
+    private Set<SysRoleResource> roleResources = new HashSet<>();
 
 
 }
