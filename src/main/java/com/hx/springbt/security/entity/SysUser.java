@@ -3,10 +3,7 @@ package com.hx.springbt.security.entity;
 import com.hx.springbt.core.entity.BaseEntity;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,6 +17,7 @@ import java.util.Set;
 @Table(name = "sys_user")
 public class SysUser extends BaseEntity {
 
+    private static final long serialVersionUID = 8650333387032624162L;
     /**
      * 用户名称
      */
@@ -45,6 +43,7 @@ public class SysUser extends BaseEntity {
      */
     private String tel;
 
+    @Transient
     /** 用户角色 */
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "sysUser")
     private Set<SysUserRole> userRoles = new HashSet<SysUserRole>();

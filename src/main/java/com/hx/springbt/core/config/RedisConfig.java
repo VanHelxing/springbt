@@ -45,9 +45,10 @@ public class RedisConfig extends CachingConfigurerSupport {
                 sb.append(method.getName());
                 //遍历参数
                 if (objects != null && objects.length > 0){
-                    for (Object obj : objects){
-                        sb.append(obj.toString());
-                    }
+//                    for (Object obj : objects){
+//                        sb.append(obj.toString());
+//                    }
+                    sb.append(objects[0].toString());
                 }
                 return sb.toString();
             }

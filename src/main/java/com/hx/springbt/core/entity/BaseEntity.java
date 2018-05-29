@@ -1,12 +1,12 @@
 package com.hx.springbt.core.entity;
 
-import com.hx.springbt.core.config.UserIdAuditorAware;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -19,8 +19,11 @@ import java.util.Date;
  */
 @Data
 @MappedSuperclass
-@EntityListeners(UserIdAuditorAware.class)
+@EntityListeners(AuditingEntityListener.class)
 public class BaseEntity implements Serializable {
+
+    private static final long serialVersionUID = -8075882163233196286L;
+
 
     /** 唯一ID */
     @Id
@@ -30,7 +33,7 @@ public class BaseEntity implements Serializable {
 
     /** 创建用户 */
     @CreatedBy
-    private String createId;
+    private String createBy;
 
     /** 创建时间*/
     @CreatedDate
@@ -39,12 +42,16 @@ public class BaseEntity implements Serializable {
 
     /** 最后一次修改用户*/
     @LastModifiedBy
-    private String lastChangeId;
+    private String lastmodifiedBy;
 
     /** 最后一次修改时间 */
     @LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)
-    private Date lastChangeTime;
+    private Date lastmodifiedTime;
+
+    /** 乐观锁 */
+    @Version
+    private Long version;
 
     /** 状态 */
     @Column(columnDefinition = "char(1) default '0'")

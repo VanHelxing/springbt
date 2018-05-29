@@ -20,6 +20,7 @@ import javax.persistence.Table;
 @DynamicUpdate
 public class SystemLog extends BaseEntity {
 
+    private static final long serialVersionUID = 2538055552370406891L;
     /**
      * 访问类型(system, api)
      */

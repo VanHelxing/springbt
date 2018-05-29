@@ -1,5 +1,6 @@
 package com.hx.springbt.core.entity;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -7,8 +8,9 @@ import java.util.Map;
  * @author : yangjunqing / yangjunqing@zhimadi.cn
  * @version : 1.0
  */
-public class PageData {
+public class PageData implements Serializable {
 
+    private static final long serialVersionUID = 2989929313039026238L;
     /**
      * 页面信息
      */
@@ -19,6 +21,9 @@ public class PageData {
      */
     private Object data;
 
+
+    public PageData() {
+    }
 
     public PageData(Map<String, Object> pageInfo, Object data) {
         this.pageInfo = pageInfo;

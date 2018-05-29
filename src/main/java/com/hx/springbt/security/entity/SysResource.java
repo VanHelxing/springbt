@@ -16,6 +16,7 @@ import javax.persistence.Table;
 @Table(name = "sys_resource")
 public class SysResource extends BaseEntity {
 
+    private static final long serialVersionUID = -5647920440039366351L;
     /**
      * 资源名称
      */

@@ -16,7 +16,7 @@ public class UserTest {
     @Test
     public void test(){
 
-        String password = "123123";
+        String password = "123123"; //$2a$04$rQMMpQyu2U1OVWMQGtvZauP.bijkH1E93ndxbjKhpWJnzuXlVNC6y
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(4);
 
         String after = encoder.encode(password);
