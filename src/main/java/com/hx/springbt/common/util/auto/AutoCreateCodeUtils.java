@@ -1,5 +1,14 @@
 package com.hx.springbt.common.util.auto;
 
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
+import freemarker.template.Version;
+
+import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 代码自动生成器
  * @author : yangjunqing / yangjunqing@zhimadi.cn
@@ -7,36 +16,32 @@ package com.hx.springbt.common.util.auto;
  */
 public class AutoCreateCodeUtils {
 
-    //公共部分
-    private static final String RT_1 = "\r\n";
-    private static final String RT_2 = RT_1 + RT_1;
-    private static final String BLANK_1 = " ";
-    private static final String BLANK_4 = "    ";
-    private static final String BLANK_8 = BLANK_4 + BLANK_4;
 
-    //注释部分
-    private static final String ANNOTATION_AUTHOR_PARAMTER = "@author ";
-    private static final String ANNOTATION_AUTHOR_NAME = "yangjunqing / yangjunqing@zhimadi.cn";
-    private static final String ANNOTATION_AUTHOR = ANNOTATION_AUTHOR_PARAMTER + ANNOTATION_AUTHOR_NAME;
-    private static final String ANNOTATION_DATE = "@date ";
-    private static final String ANNOTATION = "/**"+RT_1+BLANK_1+"*"+BLANK_1+ANNOTATION_AUTHOR +RT_1+BLANK_1+"*"+BLANK_1+ANNOTATION_DATE +"getDate()"+RT_1+BLANK_1+"*/"+RT_1;
+    public static void main(String[] args) throws IOException, TemplateException {
 
-    //生成的文件地址
-    private static final String DAO_PATH = "com/hx/springbt";
-    private static final String SERVICE_PATH = "com/hx/springbt";
-    private static final String SERVICE_IMPL_PATH = "com/hx/springbt";
+//        Configuration configuration = new Configuration();
+//        Template template = null;
+//https://blog.csdn.net/sz_bdqn/article/details/11376063
+        Map<String, String> root = new HashMap<>();
+        root.put("entity_name", "DictHead");
 
-    //包名
-    private static final String ENTITY_URL = "com.hx.springbt.core.entity";
-    private static final String DAO_URL = "com.hx.springbt.core.dao";
-    private static final String SERVICE_URL = "com.hx.springbt.core.service";
-    private static final String SERVICE_IMPL_URL = "com.hx.springbt.core.service";
+        String fileName = "D:\\myworkspace\\springbt\\src\\main\\resources\\freemarker\\test.java";
+        File file = new File(fileName);
+        if (!file.exists()){
+            file.createNewFile();
+        }
 
-    //基本类
-    private static final String BASE_DAO_NAME = DAO_URL + ".BaseDao";
-    private static final String BASE_SERVICE_NAME = SERVICE_URL + ".BaseService";
-    private static final String BASE_SERVICE_IMPL_NAME = SERVICE_IMPL_URL + ".BaseServiceImpl";
+//        File t = new File("classpath:freemarker");
+//        if (!t.exists()){
+//            System.out.println("t不存在");
+//            t.mkdir();
+//        }
+//
+//        configuration.setDirectoryForTemplateLoading(t);
 
 
+//        OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
+
+    }
 
 }
