@@ -23,8 +23,13 @@
             <!-- logout button -->
             <!-- spring security 的logout方法是post类型,这里需要修改 -->
             <div id="logout" class="btn-header transparent pull-right">
-                    <span> <a th:href="@{/logout}" title="退出" data-action="userLogout" data-logout-msg="您确定要退出当前登陆吗？"><i
-                            class="fa fa-sign-out"></i></a> </span>
+                <span>
+                    <form th:action="@{/logout}" method="post" title="退出" data-action="userLogout" data-logout-msg="您确定要退出当前登陆吗？">
+                        <button type="submit">退出</button>
+                    </form>
+                </span>
+                <!--<span> <a th:href="@{/logout}" title="退出" data-action="userLogout" data-logout-msg="您确定要退出当前登陆吗？"><i
+                            class="fa fa-sign-out"></i></a> </span>-->
             </div>
             <!-- end logout button -->
 

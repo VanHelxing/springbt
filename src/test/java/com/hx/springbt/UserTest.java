@@ -1,16 +1,43 @@
 package com.hx.springbt;
 
+import com.hx.springbt.security.dao.SysResourceDao;
+import com.hx.springbt.security.dao.SysRoleDao;
+import com.hx.springbt.security.dao.SysUserDao;
+import com.hx.springbt.security.entity.SysResource;
+import com.hx.springbt.security.entity.SysUser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+import javax.annotation.Resource;
+import java.util.List;
+
+@RunWith(SpringRunner.class)
 @SpringBootTest
-@EnableJpaAuditing
 public class UserTest {
+
+    @Resource
+    private SysUserDao sysUserDao;
+    @Resource
+    private SysRoleDao sysRoleDao;
+    @Resource
+    private SysResourceDao sysResourceDao;
+
+    @Test
+    @Transactional
+    public void find(){
+        List<SysUser> users = sysUserDao.findAll();
+        System.out.println(users.toString());
+
+        List<SysResource> resources = sysResourceDao.findAll();
+        System.out.println(resources.toString());
+
+    }
 
 
     @Test

@@ -43,9 +43,7 @@ public class SysUser extends BaseEntity {
      */
     private String tel;
 
-    /** 用户角色 */
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "sysUser")
-    private Set<SysUserRole> userRoles = new HashSet<SysUserRole>();
-
-
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "userId")
+    private Set<SysUserRole> userRoles = new HashSet<>();
 }

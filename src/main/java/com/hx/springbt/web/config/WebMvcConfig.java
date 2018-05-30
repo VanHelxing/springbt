@@ -3,6 +3,7 @@ package com.hx.springbt.web.config;
 import com.hx.springbt.web.interceptor.LogInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
@@ -18,7 +19,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LogInterceptor()).addPathPatterns("/**")
                 .excludePathPatterns("/resource/**", "/smart-admin/**", "/views/**", "/webjars/**")
-                .excludePathPatterns("/", "/undefined", "/error", "/customLogin")
+                .excludePathPatterns("/", "/undefined", "/error", "/customLogin", "/logout")
                 .excludePathPatterns("/v2/**", "/swagger-ui.html", "/swagger-resources", "/configuration/**");
+    }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+
     }
 }

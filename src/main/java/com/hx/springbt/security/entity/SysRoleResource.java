@@ -20,15 +20,13 @@ public class SysRoleResource extends BaseEntity {
     /**
      * 资源
      */
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = SysResource.class)
-    @JoinColumn(name = "resource_id", nullable = false)
-    private SysResource sysResource;
+    private String resourceId;
 
     /**
      * 角色
      */
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = SysRole.class)
-    @JoinColumn(name = "role_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = SysRole.class)
+    @JoinColumn(name = "role_id")
     private SysRole sysRole;
 
     /**

@@ -16,18 +16,17 @@ import javax.persistence.*;
 public class SysUserRole extends BaseEntity {
 
     private static final long serialVersionUID = -4459080995201317505L;
+
     /**
-     * 用户
+     * 用户编号
      */
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = SysUser.class)
-    @JoinColumn(name = "user_id", nullable = false)
-    private SysUser sysUser;
+    private String userId;
 
     /**
      * 角色
      */
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = SysRole.class)
-    @JoinColumn(name = "role_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = SysRole.class)
+    @JoinColumn(name = "role_id")
     private SysRole sysRole;
 
     /**

@@ -3,10 +3,7 @@ package com.hx.springbt.security.entity;
 import com.hx.springbt.core.entity.BaseEntity;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,16 +31,18 @@ public class SysResource extends BaseEntity {
     /**
      * 功能路径
      */
-    private String methodpath;
+    private String methodPath;
 
     /**
      * 备注
      */
     private String remark;
 
-    /** 角色资源 */
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "sysResource")
+    /**
+     * 角色资源
+     */
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "resourceId")
     private Set<SysRoleResource> roleResources = new HashSet<>();
-
 
 }

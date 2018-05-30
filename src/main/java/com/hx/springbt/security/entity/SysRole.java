@@ -27,12 +27,4 @@ public class SysRole extends BaseEntity {
      * 机构
      */
     private String orgId;
-
-    /** 用户角色 */
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "sysRole")
-    private Set<SysUserRole> userRoles = new HashSet<SysUserRole>();
-
-    /** 用户资源 */
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "sysRole")
-    private Set<SysRoleResource> roleResources = new HashSet<>();
 }
