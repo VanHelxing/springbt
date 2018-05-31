@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,8 @@ public class UserController {
 
     @Resource
     private SysUserService sysUserService;
+    @Resource
+    private SessionRegistry sessionRegistry;
 
 
     /**
@@ -54,6 +57,8 @@ public class UserController {
         System.out.println(securityUser.getUserName() + "---" + securityUser.getEmail());
 
         System.out.println(RequestContextHolder.getRequestAttributes().getSessionId());
+
+        System.out.println("当前活跃人数: " + sessionRegistry.getAllPrincipals().size());
 
         return "/system/security/user/list";
     }

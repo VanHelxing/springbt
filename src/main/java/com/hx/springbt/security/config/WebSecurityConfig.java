@@ -11,11 +11,14 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 import org.springframework.security.web.session.SimpleRedirectSessionInformationExpiredStrategy;
 
@@ -57,7 +60,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .rememberMe()
             .rememberMeServices(rememberMeServices())
-            .key("INTERNAL_SECRET_KEY");
+            .key("INTERNAL_SECRET_KEY")
+                .and()
+                .sessionManagement().maximumSessions(1).expiredUrl("/customLogin?expire").sessionRegistry(sessionRegistry());
 
         //解决不允许显示在iframe的问题
         http.headers().frameOptions().disable();
@@ -89,9 +94,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return rememberMeServices;
     }
 
+    @Bean
+    public SessionRegistry sessionRegistry(){
+        return new SessionRegistryImpl();
+    }
+
+    @Bean
+    public HttpSessionEventPublisher httpSessionEventPublisher(){
+        return new HttpSessionEventPublisher();
+    }
+
     //session失效跳转
     private SessionInformationExpiredStrategy sessionInformationExpiredStrategy(){
-        return new SimpleRedirectSessionInformationExpiredStrategy("/customLogin");
+        return new SimpleRedirectSessionInformationExpiredStrategy("/customLogin?expire");
     }
 
 

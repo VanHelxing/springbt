@@ -1,4 +1,4 @@
-package com.hx.springbt.core.config;
+package com.hx.springbt.security.config;
 
 import org.springframework.session.web.context.AbstractHttpSessionApplicationInitializer;
 

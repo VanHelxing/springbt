@@ -1,5 +1,6 @@
-package com.hx.springbt.core.config;
+package com.hx.springbt.security.config;
 
+import com.hx.springbt.core.config.RedisConfig;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 
@@ -14,5 +15,11 @@ public class SecurityInitializer extends AbstractSecurityWebApplicationInitializ
      */
     public SecurityInitializer() {
         super(SecurityConfig.class, RedisConfig.class);
+    }
+
+    //session事件监听器
+    @Override
+    protected boolean enableHttpSessionEventPublisher() {
+        return true;
     }
 }
