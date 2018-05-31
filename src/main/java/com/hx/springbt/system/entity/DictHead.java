@@ -1,7 +1,6 @@
-package com.hx.springbt.system.entity.dict;
+package com.hx.springbt.system.entity;
 
 import com.hx.springbt.core.entity.BaseEntity;
-import com.hx.springbt.system.entity.dict.DictDetail;
 import lombok.Data;
 
 import javax.persistence.*;

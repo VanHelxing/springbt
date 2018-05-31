@@ -1,4 +1,4 @@
-package com.hx.springbt.system.entity.dict;
+package com.hx.springbt.system.entity;
 
 import com.hx.springbt.core.entity.BaseEntity;
 import lombok.Data;

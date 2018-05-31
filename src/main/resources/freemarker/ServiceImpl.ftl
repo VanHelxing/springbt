@@ -16,11 +16,11 @@ import javax.annotation.Resource;
 public class ${entity_name}ServiceImpl extends BaseServiceImpl<${entity_name}> implements ${entity_name}Service {
 
     @Resource
-    private ${entity_name}Dao ${entity_name_lower}Dao;
+    private ${entity_name}Dao ${lower_entity_name}Dao;
 
 
     @Override
     protected BaseDao<${entity_name}> getRepository() {
-        return ${entity_name_lower}Dao;
+        return ${lower_entity_name}Dao;
     }
     }
