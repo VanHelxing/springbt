@@ -31,7 +31,7 @@ public class AutoCreateCodeUtil {
      * 需要调整的值
      */
     /** entity name */
-    private final static String ENTITY_NAME = "DictHead";
+    private final static String ENTITY_NAME = "DictDetail";
     /** 模块名称 **/
     private final static String MODULE_NAME = "system";
     //-----------------------------------------------------------------------------------------------

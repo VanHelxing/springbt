@@ -16,6 +16,8 @@ import org.springframework.security.web.access.intercept.FilterSecurityIntercept
 import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
+import org.springframework.security.web.session.SessionInformationExpiredStrategy;
+import org.springframework.security.web.session.SimpleRedirectSessionInformationExpiredStrategy;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -56,6 +58,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .rememberMe()
             .rememberMeServices(rememberMeServices())
             .key("INTERNAL_SECRET_KEY");
+
+        //解决不允许显示在iframe的问题
+        http.headers().frameOptions().disable();
     }
 
     @Override
@@ -83,5 +88,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         rememberMeServices.setParameter("remember-me");
         return rememberMeServices;
     }
+
+    //session失效跳转
+    private SessionInformationExpiredStrategy sessionInformationExpiredStrategy(){
+        return new SimpleRedirectSessionInformationExpiredStrategy("/customLogin");
+    }
+
 
 }
