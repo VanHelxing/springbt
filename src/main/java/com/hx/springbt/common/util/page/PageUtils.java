@@ -1,6 +1,5 @@
 package com.hx.springbt.common.util.page;
 
-import com.hx.springbt.common.util.lang.StringUtils;
 import com.hx.springbt.core.constant.Constraints;
 import com.hx.springbt.core.entity.PageData;
 import com.hx.springbt.core.entity.PageParam;

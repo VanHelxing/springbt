@@ -61,8 +61,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .rememberMe()
             .rememberMeServices(rememberMeServices())
             .key("INTERNAL_SECRET_KEY")
-                .and()
-                .sessionManagement().maximumSessions(1).expiredUrl("/customLogin?expire").sessionRegistry(sessionRegistry());
+            .and()
+            .sessionManagement().maximumSessions(1).expiredUrl("/customLogin?expire").sessionRegistry(sessionRegistry());
 
         //解决不允许显示在iframe的问题
         http.headers().frameOptions().disable();
